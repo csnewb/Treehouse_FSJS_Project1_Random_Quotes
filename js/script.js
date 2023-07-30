@@ -27,6 +27,9 @@ let quotes = [
 
 
 function getRandomInt(min, max) {
+  // function to make random integer generation more modular
+  // This function accepts a minimum and maximum integer
+  // function will return a random integer within the min max values
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -39,7 +42,12 @@ function getRandomInt(min, max) {
  * `getRandomQuote` function
 ***/
 function getRandomQuote(quotes) {
+  // accepts quotes array as a parameter 
+  // get the random intiger and store it in rand_val
+  // we are passing 1 as the min value
+  // we are passing the length of the quotes array minus 1 as the max value to avoid out of index errors
   let rand_val = getRandomInt(1, quotes.length - 1)
+  // this looks up the quote in the array by a random index value
   let quote = quotes[rand_val];
   return quote
 }
@@ -50,19 +58,24 @@ function getRandomQuote(quotes) {
 ***/
 
 function printQuote() {
+  // the primary role of this function is to get a random quote and update the html accordingly
+
   let random_quote = getRandomQuote(quotes);
   html_string = `
   <p class="quote"> ${random_quote.quote} </p>
   <p class="source">${random_quote.source}`
 
+  //check if citation is present in the selected quote
   if (random_quote.citation) {
     html_string += `, ${random_quote.citation}`
   }
 
+  //check if year is present in the selected quote
   if (random_quote.year) {
     html_string += `, ${random_quote.year}`
   }
 
+  // this closes out the html regardless of the outcome of the if statements
   html_string += '</p>'
 
   document.getElementById('quote-box').innerHTML = html_string
@@ -74,4 +87,5 @@ function printQuote() {
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
+// this finds the load-quote element and checks if the button is clicked, and if so it runs printQuote
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
